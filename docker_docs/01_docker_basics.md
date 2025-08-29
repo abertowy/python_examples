@@ -130,6 +130,8 @@ in case of errors: `sudo chmod 666 /var/run/docker.sock`
         - `--rm`: Removes intermediate containers after a successful build. This is true by default; setting false keeps them for debugging.
     9. Some other cmds:
         ```
-        docker system df
+        docker system df                # show space used by docker
+        docker run -dit container-name  # run in background
+        docker logs -t container-id     # show logs for background container
         ```
 
