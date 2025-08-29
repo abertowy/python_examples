@@ -14,3 +14,8 @@
 `http://localhost:5000/weather?city=Belgrade`  
 or via curl:  
 `curl localhost:5000/weather?city=Belgrade`  
+
+6. Other options  
+    - do not clone repo in docker container
+    - instead mount src  
+        `docker run -p 5000:5000 weather-app -v ${PWD}/src:/opt:ro`
