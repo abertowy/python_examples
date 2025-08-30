@@ -1,7 +1,7 @@
 import requests
 import time
 
-WEATHER_API_URL = "http://127.0.0.1:5000/weather"
+WEATHER_API_URL = "http://0.0.0.0:5000/weather"
 CITY = "Belgrade"  # Change to your desired city
 
 def fetch_weather():
