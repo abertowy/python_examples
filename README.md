@@ -8,7 +8,12 @@
 `docker build -t weather-app:latest . --no-cache`  
 
 4. Run Docker container
-`docker run -p 5000:5000 weather-app`  
+```
+docker network create weather_net
+docker run -p 5000:5000 --network weather_net weatherapp:1.1.0
+docker run -p 5001:5000 --network weather_net weatherclient:1.1.0
+
+```  
 
 5. Get info via browser:  
 `http://localhost:5000/weather?city=Belgrade`  
