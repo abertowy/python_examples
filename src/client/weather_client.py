@@ -1,7 +1,9 @@
 import requests
 import time
+import os
 
-WEATHER_API_URL = "http://0.0.0.0:5000/weather"
+SERVER_ADDR = os.getenv("SERVER_ADDR")
+WEATHER_API_URL = f"http://{SERVER_ADDR}:5000/weather"
 CITY = "Belgrade"  # Change to your desired city
 
 def fetch_weather():
