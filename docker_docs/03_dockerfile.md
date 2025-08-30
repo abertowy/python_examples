@@ -1,3 +1,6 @@
+Dockerfile
+==========
+  
 1. `FROM`: specifies the base image from which to start the build. This is typically the first instruction.
 
 2. `RUN': executes commands in a new layer on top of the current image, committing the result. Used for installing packages, creating directories, etc.
@@ -31,3 +34,19 @@
 16. `SHELL`: allows overriding the default shell program used for the shell form of `RUN`, `CMD`, and `ENTRYPOINT` instructions.
 
 17. `STOPSIGNAL`: sets the system call signal that will be sent to the container to exit
+  
+Layers
+-------
+Docker containers leverage a layered architecture for efficiency and resource optimization.
+1. Image layers  
+    - Docker images are built from a series of `read-only` layers. Each instruction in a **Dockerfile**, such as `FROM`, `RUN`, `COPY`, or `ADD`, typically creates a **new layer**.
+    - These layers are **stacked** on top of each other, forming the complete filesystem of the image.
+    - They are **immutable**, meaning once created, they cannot be modified. Any changes result in the creation of a new layer.
+    - Docker utilizes a union filesystem (like OverlayFS) to combine these layers into a single, cohesive view for the container.
+    - Image layers are **cached** by Docker, enabling faster builds and efficient resource usage, as common layers can be shared between multiple images.
+    - Whenever one layer is changed, all upper (or following) layers will be rebuilt
+2. Container layer  
+    - When a Docker container is launched from an image, Docker adds a thin, **writable** layer on **top** of the image's read-only layers. This is known as the `container layer` or container filesystem.
+    - All changes made within the running container, such as creating, modifying, or deleting files, are stored in this writable layer.
+    - This ensures that the underlying image layers remain untouched and immutable.
+    - The container layer is **ephemeral**; when the container is stopped or removed, this writable layer is discarded, and any changes made within it are lost unless data is persisted using Docker volumes.
