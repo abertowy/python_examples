@@ -5,7 +5,7 @@
 `curl http://127.0.0.1:5000/weather?city=Belgrade`
 
 3. Build docker container  
-`docker build -t weather-app . --no-cache`  
+`docker build -t weather-app:latest . --no-cache`  
 
 4. Run Docker container
 `docker run -p 5000:5000 weather-app`  
