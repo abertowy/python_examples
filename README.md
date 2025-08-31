@@ -6,8 +6,9 @@
 
 3. Build docker container  
 ```
-docker build -t weatherapp:X.X.X . --no-cache
-docker build -t weatherclient:X.X.X . --no-cache
+docker build -t abertowy/weatherapp:X.X.X . --no-cache
+docker build -t abertowy/weatherclient:X.X.X . --no-cache
+docker push abertowy/weatherclient:X.X.X
 ```  
 
 4. Run Docker container
