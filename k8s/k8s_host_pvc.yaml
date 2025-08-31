@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: persistentVolumeClaim
+metadata:
+  name: weatherapp-pvc
+spec:
+  volumeName: weatherapp-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  storageClassName: standard
