@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weatherapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather-app
+    # matchExpressions:
+    #   - key: environment
+    #     operator: In
+    #     values:
+    #     - production
+  template:
+    metadata:
+      labels:
+        app: weather-app
+    spec:
+      containers:
+        - name: weather-app-container
+          image: abertowy/weather:1.1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          # volumeMounts:
+          #   - name: weatherapp-volume
+          #     mountPath: /weather_app/data
+        - name: weatherclient-app-container
+          image: abertowy/weatherclient:1.3.0
+          imagePullPolicy: IfNotPresent
+          # ports:
+          #   - containerPort: 5000
+          env:
+            - name: SERVER_ADDR
+              value: "localhost"
+        # - name: ENVIRONMENT_2
+        #   value: "value"
+        #   envFrom:
+        #   - configMapRef:
+        #       name: weatherapp-config
+        # - name: ENVIRONMENT_3
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: weatherapp-config
+        #       key: ENVIRONMENT
+        # resources:
+        #   requests:
+        #     memory: "256Mi"
+        #     cpu: "500m"
+        #   limits:
+        #     memory: "512Mi"
+        #     cpu: "1"
+        # livenessProbe:
+        #   httpGet:
+        #     path: /health         # ToBeAdded Later
+        #     port: 5000
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
+      # volumes:
+      #   - name: weatherapp-volume
+      #     hostPath:
+      #       path: /tmp/weatherapp-data
+      #       type: DirectoryOrCreate
+      #   - name: weatherapp-persistent-storage
+      #     persistentVolumeClaim:
+      #       claimName: weatherapp-pvc
+      # restartPolicy: Always
